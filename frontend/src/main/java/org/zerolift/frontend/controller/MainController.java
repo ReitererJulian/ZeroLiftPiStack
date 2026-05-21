@@ -75,7 +75,7 @@ public class MainController {
             backendStatusLabel.setText("Status: Verbinde mit Server...");
             java.net.http.HttpClient httpClient = java.net.http.HttpClient.newHttpClient();
             java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()
-                    .uri(java.net.URI.create("http://localhost:8080/api/ping")).build();
+                    .uri(java.net.URI.create("https://api.zerolift.at/api/ping")).build();
             java.net.http.HttpResponse<String> response = httpClient.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 200) {

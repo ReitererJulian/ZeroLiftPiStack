@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 public class EquipmentService {
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final String URL = "http://localhost:8080/api/equipment";
+    private final String URL = "https://api.zerolift.at/api/equipment";
 
 
     public CompletableFuture<List<Map<String, Object>>> getAllEquipment() {
