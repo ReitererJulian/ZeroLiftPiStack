@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zerolift.frontend.controller.MainController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="card">
+            <BorderPane.margin>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </BorderPane.margin>
+            <padding>
+                <Insets bottom="15" left="20" right="20" top="15" />
+            </padding>
+
+            <Label style="-fx-font-size: 24px; -fx-font-weight: 900; -fx-text-fill: #00ADB5;" text="ZERO LIFT" />
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Button fx:id="topSyncBtn" styleClass="button-secondary" text="Sync" onAction="#sync"/>
+            <Button fx:id="topSettingsBtn" styleClass="button-secondary" text="Settings" onAction="#settings"/>
+            <Button fx:id="topProfileBtn" text="Profile" onAction="#profile"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+
+                <Tab fx:id="dashboardTab" text="Dashboard">
+                    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                        <VBox>
+                            <HBox alignment="CENTER_LEFT" spacing="20" styleClass="card">
+                                <VBox.margin>
+                                    <Insets left="20" right="20" top="20" />
+                                </VBox.margin>
+                                <padding>
+                                    <Insets bottom="15" left="20" right="20" top="15" />
+                                </padding>
+                                <Button fx:id="testConnectionBtn" text="Verbindung testen" onAction="#ladeDatenVomBackend" />
+                                <Label fx:id="backendStatusLabel" style="-fx-font-weight: bold; -fx-text-fill: #00ADB5; -fx-font-size: 14px;" text="Status: Klicke auf den Button, um das Backend zu pingen!" />
+                            </HBox>
+
+                            <HBox alignment="TOP_CENTER" spacing="20">
+                                <padding>
+                                    <Insets bottom="20" left="20" right="20" top="20" />
+                                </padding>
+
+                                <VBox prefWidth="280" spacing="15" styleClass="card">
+                                    <Label styleClass="header-label" text="Today's Workout" />
+                                    <ListView fx:id="todayWorkoutList" VBox.vgrow="ALWAYS" />
+
+                                    <VBox spacing="10">
+                                        <Button fx:id="startWorkoutBtn" maxWidth="Infinity" text="Start Workout" />
+                                        <Button fx:id="finishWorkoutBtn" maxWidth="Infinity" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="Finish Workout 🏆" onAction="#finishWorkout" />
+                                    </VBox>
+                                </VBox>
+
+                                <VBox spacing="15" styleClass="card" HBox.hgrow="ALWAYS">
+                                    <VBox spacing="5">
+                                        <Label styleClass="header-label" text="Current Exercise" />
+                                        <Label fx:id="currentExerciseNameLabel" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #00ADB5;" text="Warte auf Start..." />
+                                    </VBox>
+
+                                    <HBox alignment="CENTER_LEFT" style="-fx-background-color: #2C2C2C; -fx-background-radius: 5px;">
+                                        <padding>
+                                            <Insets bottom="8" left="12" right="12" top="8" />
+                                        </padding>
+                                        <Label fx:id="lastTimePerformanceLabel" style="-fx-text-fill: #9E9E9E; -fx-font-style: italic;" text="Letztes Mal: 3 x 10 mit 80 kg" />
+                                    </HBox>
+
+                                    <GridPane hgap="15" vgap="15">
+                                        <Label text="Sets:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                        <TextField fx:id="setsInput" promptText="e.g. 3" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                        <Label text="Reps:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                        <TextField fx:id="repsInput" promptText="e.g. 10" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                        <Label text="Weight:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                        <TextField fx:id="weightInput" promptText="in kg" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                        <columnConstraints>
+                                            <ColumnConstraints minWidth="60" />
+                                            <ColumnConstraints hgrow="ALWAYS" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                        </rowConstraints>
+                                    </GridPane>
+
+                                    <HBox alignment="CENTER_LEFT" spacing="10">
+                                        <Button fx:id="saveSetBtn" text="Save Set" onAction="#saveSet"/>
+                                        <Button fx:id="editSetBtn" styleClass="button-secondary" text="Edit" onAction="#editSet"/>
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="skipSetBtn" styleClass="button-secondary" text="Skip" onAction="#skipSet"/>
+                                    </HBox>
+
+                                    <Label style="-fx-font-weight: bold; -fx-padding: 10 0 0 0;" text="Notes" />
+                                    <TextArea fx:id="workoutNotesArea" prefHeight="100" promptText="How did it feel?" />
+                                </VBox>
+
+                                <VBox alignment="TOP_CENTER" prefWidth="280" spacing="20" styleClass="card">
+                                    <Label styleClass="header-label" text="Rest Timer" />
+
+                                    <Label fx:id="restTimerLabel" style="-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: #00ADB5;" text="01:30" />
+                                    <Button fx:id="startTimerBtn" maxWidth="Infinity" text="Start Timer" onAction="#startTimer"/>
+
+                                    <Separator styleClass="line" />
+
+                                    <Label styleClass="header-label" text="Personal Record" />
+                                    <Label fx:id="personalRecordLabel" style="-fx-font-size: 18px;" text="100 kg x 5" />
+                                    <Label style="-fx-text-fill: #9E9E9E;" text="Last Best Weight" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </ScrollPane>
+                </Tab>
+
+                <Tab fx:id="workoutsTab" text="Workouts">
+                    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                        <HBox spacing="20">
+                            <padding>
+                                <Insets bottom="20" left="20" right="20" top="20" />
+                            </padding>
+
+                            <VBox prefWidth="250" spacing="15" styleClass="card">
+                                <Label styleClass="header-label" text="My Workouts" />
+                                <ListView fx:id="workoutList" VBox.vgrow="ALWAYS" />
+                                <HBox spacing="10">
+                                    <Button fx:id="newWorkoutBtn" maxWidth="Infinity" text="New" HBox.hgrow="ALWAYS" onAction="#newWorkout"/>
+                                    <Button fx:id="deleteWorkoutBtn" styleClass="button-danger" text="Delete" onAction="#deleteWorkout" />
+                                </HBox>
+                            </VBox>
+
+                            <VBox spacing="15" styleClass="card" HBox.hgrow="ALWAYS">
+                                <Label styleClass="header-label" text="Workout Editor" />
+
+                                <Label text="Workout Name" />
+                                <TextField fx:id="workoutNameField" promptText="e.g. Push Day" />
+
+                                <Label text="Exercises in this Workout" />
+                                <ListView fx:id="exerciseList" VBox.vgrow="ALWAYS" />
+
+                                <HBox spacing="10">
+                                    <Button fx:id="saveWorkoutBtn" text="Save Workout" onAction="#saveWorkout"/>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="removeExerciseBtn" styleClass="button-danger" text="Remove Selected" onAction="#removeExercise"/>
+                                </HBox>
+                            </VBox>
+
+                            <VBox prefWidth="280" spacing="15" styleClass="card">
+                                <Label styleClass="header-label" text="Exercise Library" />
+                                <TextField fx:id="searchExerciseField" promptText="Search exercise..." />
+                                <ListView fx:id="exerciseLibraryList" VBox.vgrow="ALWAYS" />
+                                <Button fx:id="addExerciseToWorkoutBtn" maxWidth="Infinity" text="Add to Workout" onAction="#addExerciseToWorkout"/>
+                            </VBox>
+                        </HBox>
+                    </ScrollPane>
+                </Tab>
+
+                <Tab fx:id="exercisesTab" text="Exercises">
+                    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                        <HBox spacing="20">
+                            <padding>
+                                <Insets bottom="20" left="20" right="20" top="20" />
+                            </padding>
+
+                            <VBox prefWidth="250" spacing="15" styleClass="card">
+                                <Label styleClass="header-label" text="Categories" />
+                                <ListView fx:id="categoryList" VBox.vgrow="ALWAYS" />
+                            </VBox>
+
+                            <VBox alignment="TOP_CENTER" spacing="15" styleClass="card" HBox.hgrow="ALWAYS">
+                                <Label alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="header-label" text="Exercise Details" />
+
+                                <HBox alignment="CENTER_LEFT" spacing="20">
+                                    <StackPane prefHeight="150" prefWidth="150" style="-fx-background-color: #2C2C2C; -fx-background-radius: 8px;">
+                                        <Label style="-fx-text-fill: #9E9E9E;" text="No Image" />
+                                        <ImageView fx:id="exerciseImageView" fitHeight="150" fitWidth="150" />
+                                    </StackPane>
+
+                                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                                        <Label text="Exercise Name" />
+                                        <TextField fx:id="exerciseNameField" promptText="Bench Press" />
+
+                                        <Label text="Muscle Group" />
+                                        <ComboBox fx:id="muscleGroupComboBox" maxWidth="Infinity" promptText="Select Group..." />
+                                    </VBox>
+                                </HBox>
+
+                                <Label maxWidth="Infinity" text="Description" />
+                                <TextArea fx:id="exerciseDescriptionArea" prefHeight="120" promptText="Form instructions..." VBox.vgrow="ALWAYS" />
+
+                                <Button fx:id="saveExerciseBtn" maxWidth="Infinity" text="Save Exercise" onAction="#saveExercise"/>
+                            </VBox>
+                        </HBox>
+                    </ScrollPane>
+                </Tab>
+
+                <Tab fx:id="statisticsTab" text="Statistics">
+                    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                        <VBox spacing="20">
+                            <padding>
+                                <Insets bottom="20" left="20" right="20" top="20" />
+                            </padding>
+
+                            <VBox spacing="10" styleClass="card">
+                                <Label styleClass="header-label" text="Strength Progress" />
+                                <LineChart fx:id="progressChart" prefHeight="300">
+                                    <xAxis>
+                                        <NumberAxis label="Workout Session" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis label="Weight Lifted (kg)" />
+                                    </yAxis>
+                                </LineChart>
+                            </VBox>
+
+                            <VBox spacing="10" styleClass="card">
+                                <Label styleClass="header-label" text="Weekly Training Frequency" />
+                                <BarChart fx:id="workoutFrequencyChart" prefHeight="300">
+                                    <xAxis>
+                                        <CategoryAxis label="Day of Week" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis label="Number of Workouts" />
+                                    </yAxis>
+                                </BarChart>
+                            </VBox>
+
+                            <VBox spacing="10" styleClass="card">
+                                <Label styleClass="header-label" text="Hall of Fame - Personal Records" />
+                                <ListView fx:id="prList" prefHeight="200" />
+                            </VBox>
+
+                        </VBox>
+                    </ScrollPane>
+                </Tab>
+
+                <Tab fx:id="communityTab" text="Community">
+                    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                        <VBox spacing="20">
+                            <padding>
+                                <Insets bottom="20" left="20" right="20" top="20" />
+                            </padding>
+
+                            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="card">
+                                <TextField fx:id="searchCommunityField" promptText="Search public workouts..." HBox.hgrow="ALWAYS" />
+                                <Button fx:id="searchCommunityBtn" text="Search Community" onAction="#searchCommunity"/>
+                            </HBox>
+
+                            <VBox spacing="10" styleClass="card" VBox.vgrow="ALWAYS">
+                                <Label styleClass="header-label" text="Trending Workouts" />
+                                <ListView fx:id="communityWorkoutFeed" VBox.vgrow="ALWAYS" />
+                            </VBox>
+                        </VBox>
+                    </ScrollPane>
+                </Tab>
+
+                <Tab fx:id="profileTab" text="Profile">
+                    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                        <HBox alignment="CENTER">
+                            <padding>
+                                <Insets bottom="40" top="40" />
+                            </padding>
+
+                            <VBox alignment="CENTER" prefWidth="400" spacing="20" styleClass="card">
+
+                                <StackPane maxWidth="120" prefHeight="120" prefWidth="120" style="-fx-background-color: #2C2C2C; -fx-background-radius: 100px;">
+                                    <Label style="-fx-text-fill: #9E9E9E;" text="Avatar" />
+                                    <ImageView fx:id="profileAvatarView" fitHeight="120" fitWidth="120" />
+                                </StackPane>
+
+                                <Label fx:id="profileNameLabel" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Julian_Lifter" />
+
+                                <GridPane alignment="CENTER" hgap="20" vgap="15">
+                                    <Label style="-fx-text-fill: #9E9E9E;" text="Total Workouts:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                    <Label fx:id="totalWorkoutsLabel" style="-fx-font-weight: bold; -fx-font-size: 16px;" text="142" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                    <Label style="-fx-text-fill: #9E9E9E;" text="Total Weight:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                    <Label fx:id="totalWeightLabel" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #00ADB5;" text="12,500 kg" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <columnConstraints>
+                                        <ColumnConstraints />
+                                        <ColumnConstraints />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                    </rowConstraints>
+                                </GridPane>
+
+                                <Separator styleClass="line" />
+
+                                <VBox alignment="CENTER" maxWidth="Infinity" spacing="10">
+                                    <Button fx:id="editProfileBtn" maxWidth="Infinity" styleClass="button-secondary" text="Edit Profile" onAction="#editProfile" />
+                                    <Button fx:id="exportDataBtn" maxWidth="Infinity" styleClass="button-secondary" text="Export Workout Data" onAction="#exportData"/>
+                                    <Button fx:id="signOutBtn" maxWidth="Infinity" styleClass="button-danger" text="Sign Out" onAction="#signOut"/>
+                                </VBox>
+
+                            </VBox>
+                        </HBox>
+                    </ScrollPane>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #1a1a1a;">
+            <padding>
+                <Insets bottom="5" left="20" right="20" top="5" />
+            </padding>
+
+            <Label fx:id="statusOnlineLabel" style="-fx-text-fill: #00ADB5; -fx-font-size: 12px;" text="Status: Online" />
+            <Label fx:id="lastSyncLabel" style="-fx-text-fill: #9E9E9E; -fx-font-size: 12px;" text=" | Last Sync: Just now" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="appVersionLabel" style="-fx-text-fill: #9E9E9E; -fx-font-size: 12px;" text="Zero Lift v1.0" />
+        </HBox>
+    </bottom>
+
+</BorderPane>
