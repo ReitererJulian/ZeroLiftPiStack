@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name = "users") // 'user' ist ein reserviertes SQL-Wort, daher 'users'
 @Data
 public class User {
     @Id
@@ -17,10 +18,13 @@ public class User {
     @Setter(AccessLevel.NONE)
     private UUID id;
 
+    @Column(nullable = false, length = 100)
     private String username;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(name = "password_hash", nullable = false) // Match mit DB-Feld
     private String passwordHash;
 
     @OneToMany(mappedBy = "createdBy")

@@ -20,12 +20,18 @@ public class Exercise {
 
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne
+    @JoinColumn(name = "created_by")
     private User createdBy;
 
     @ManyToMany
+    @JoinTable(
+            name = "exercise_equipment", // Name der Zwischentabelle aus deinem Diagramm
+            joinColumns = @JoinColumn(name = "exercise_id"),
+            inverseJoinColumns = @JoinColumn(name = "equipment_id")
+    )
     private List<Equipment> equipment = new ArrayList<>();
-
 }

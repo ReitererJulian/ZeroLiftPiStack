@@ -171,9 +171,19 @@
                                 <Insets bottom="20" left="20" right="20" top="20" />
                             </padding>
 
-                            <VBox prefWidth="250" spacing="15" styleClass="card">
-                                <Label styleClass="header-label" text="Categories" />
-                                <ListView fx:id="categoryList" VBox.vgrow="ALWAYS" />
+                            <VBox prefWidth="300" spacing="15" styleClass="card">
+                                <Label styleClass="header-label" text="Available Equipment" />
+
+                                <ListView fx:id="equipmentListView" VBox.vgrow="ALWAYS" />
+
+                                <Separator styleClass="line" />
+
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: #00ADB5;" text="New Equipment" />
+                                <TextField fx:id="equipmentTitleInput" promptText="e.g. Barbell, Dumbbell" />
+                                <TextField fx:id="equipmentDescInput" promptText="Description (optional)" />
+
+                                <Button fx:id="saveEquipmentBtn" maxWidth="Infinity" text="Save Equipment" onAction="#saveEquipment"/>
+                                <Label fx:id="equipmentStatusLabel" style="-fx-text-fill: #4CAF50; -fx-font-size: 12px;" text="" />
                             </VBox>
 
                             <VBox alignment="TOP_CENTER" spacing="15" styleClass="card" HBox.hgrow="ALWAYS">

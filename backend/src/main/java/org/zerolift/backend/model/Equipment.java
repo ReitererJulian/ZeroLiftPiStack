@@ -17,8 +17,10 @@ public class Equipment {
 
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne
+    @JoinColumn(name = "created_by")
     private User createdBy;
 }
