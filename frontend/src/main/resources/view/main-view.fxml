@@ -41,7 +41,7 @@
                                 <padding>
                                     <Insets bottom="15" left="20" right="20" top="15" />
                                 </padding>
-                                <Button fx:id="testConnectionBtn" text="Verbindung testen" onAction="#ladeDatenVomBackend" />
+                                <Button fx:id="testConnectionBtn" text="Verbindung testen" onAction="#loadDataFromBackend" />
                                 <Label fx:id="backendStatusLabel" style="-fx-font-weight: bold; -fx-text-fill: #00ADB5; -fx-font-size: 14px;" text="Status: Klicke auf den Button, um das Backend zu pingen!" />
                             </HBox>
 
