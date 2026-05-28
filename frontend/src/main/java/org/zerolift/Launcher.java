@@ -1,8 +1,8 @@
 package org.zerolift;
 
-import org.zerolift.frontend.PingFrontendApplication;
+import org.zerolift.frontend.ZeroLiftFrontendApplication;
 
 public class Launcher {
-public static void main(String[] args) {
-    PingFrontendApplication.main(args);}
+
+public static void main(String[] args) {ZeroLiftFrontendApplication.main(args);}
 }

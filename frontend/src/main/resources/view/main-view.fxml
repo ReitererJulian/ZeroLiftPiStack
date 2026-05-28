@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.zerolift.frontend.controller.MainController">
+
+    <center>
+        <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <!-- ── Equipment ─────────────────────────────────────── -->
+                <Tab text="Equipment">
+                    <HBox spacing="20">
+                        <padding><Insets topRightBottomLeft="20"/></padding>
+
+                        <VBox prefWidth="300" spacing="10" styleClass="card">
+                            <Label text="Available Equipment" styleClass="header-label"/>
+                            <ListView fx:id="equipmentListView" VBox.vgrow="ALWAYS"/>
+                        </VBox>
+
+                        <VBox prefWidth="300" spacing="10" styleClass="card">
+                            <Label text="New Equipment" styleClass="header-label"/>
+                            <TextField fx:id="equipmentTitleInput" promptText="e.g. Barbell, Dumbbell"/>
+                            <TextField fx:id="equipmentDescInput"  promptText="Description (optional)"/>
+                            <Button fx:id="saveEquipmentBtn" maxWidth="Infinity"
+                                    text="Save Equipment" onAction="#saveEquipment"/>
+                            <Label fx:id="equipmentStatusLabel" styleClass="status-label" text=""/>
+                        </VBox>
+                    </HBox>
+                </Tab>
+
+                <!-- ── Exercises ──────────────────────────────────────── -->
+                <Tab text="Exercises">
+                    <HBox spacing="20">
+                        <padding><Insets topRightBottomLeft="20"/></padding>
+
+                        <VBox prefWidth="250" spacing="10" styleClass="card">
+                            <Label text="Exercises" styleClass="header-label"/>
+                            <ListView fx:id="exerciseLibraryList" VBox.vgrow="ALWAYS"/>
+                        </VBox>
+
+                        <VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+                            <Label text="Exercise Details" styleClass="header-label"/>
+
+                            <Label text="Name"/>
+                            <TextField fx:id="exerciseNameField" promptText="e.g. Bench Press"/>
+
+                            <Label text="Equipment"/>
+                            <ListView fx:id="equipmentSelectionList" prefHeight="120"/>
+
+                            <Label text="Description"/>
+                            <TextArea fx:id="exerciseDescriptionArea" prefHeight="100"
+                                      promptText="Form instructions..." VBox.vgrow="ALWAYS"/>
+
+                            <Button fx:id="saveExerciseBtn" maxWidth="Infinity"
+                                    text="Save Exercise" onAction="#saveExercise"/>
+                        </VBox>
+                    </HBox>
+                </Tab>
+
+                <!-- ── Workouts ───────────────────────────────────────── -->
+                <Tab text="Workouts">
+                    <HBox spacing="20">
+                        <padding><Insets topRightBottomLeft="20"/></padding>
+
+                        <VBox prefWidth="250" spacing="10" styleClass="card">
+                            <Label text="My Workouts" styleClass="header-label"/>
+                            <ListView fx:id="workoutList" VBox.vgrow="ALWAYS"/>
+                        </VBox>
+
+                        <VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+                            <Label text="Workout Editor" styleClass="header-label"/>
+
+                            <Label text="Workout Name"/>
+                            <TextField fx:id="workoutNameField" promptText="e.g. Push Day"/>
+
+                            <Label text="Exercises"/>
+                            <ListView fx:id="exerciseList" VBox.vgrow="ALWAYS"/>
+
+                            <Label text="Description"/>
+                            <TextArea fx:id="workoutDescriptionArea" prefHeight="80"
+                                      promptText="e.g. Push Day routine..."/>
+
+                            <HBox spacing="10">
+                                <Button text="Save Workout" onAction="#saveWorkout"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button text="Remove Selected" styleClass="button-danger"
+                                        onAction="#removeExercise"/>
+                            </HBox>
+                        </VBox>
+
+                        <VBox prefWidth="280" spacing="10" styleClass="card">
+                            <Label text="Exercise Library" styleClass="header-label"/>
+                            <TextField fx:id="searchExerciseField" promptText="Search..."/>
+                            <ListView fx:id="exerciseLibraryListWorkout" VBox.vgrow="ALWAYS"/>
+                            <Button maxWidth="Infinity" text="Add to Workout"
+                                    onAction="#addExerciseToWorkout"/>
+                        </VBox>
+                    </HBox>
+                </Tab>
+
+                <!-- ── Exercises ──────────────────────────────────────── -->
+                <Tab text="Home">
+                    <HBox spacing="20">
+                        <padding><Insets topRightBottomLeft="20"/></padding>
+
+                        <VBox prefWidth="250" spacing="10" styleClass="card">
+                            <Label text="My Workouts" styleClass="header-label"/>
+                            <ListView fx:id="homeWorkoutList" VBox.vgrow="ALWAYS"/>
+                        </VBox>
+
+                        <VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+                            <TextArea fx:id="workoutDetailArea" VBox.vgrow="ALWAYS"
+                                      editable="false" promptText="Select a workout..."
+                                      style="-fx-control-inner-background: #1E1E1E; -fx-text-fill: #EEEEEE;"/>
+                        </VBox>
+                    </HBox>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
