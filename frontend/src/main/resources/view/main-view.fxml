@@ -69,12 +69,6 @@
                         <VBox prefWidth="250" spacing="10" styleClass="card">
                             <Label text="My Workouts" styleClass="header-label"/>
                             <ListView fx:id="workoutList" VBox.vgrow="ALWAYS"/>
-                            <HBox spacing="10">
-                                <Button text="New" HBox.hgrow="ALWAYS" maxWidth="Infinity"
-                                        onAction="#newWorkout"/>
-                                <Button text="Delete" styleClass="button-danger"
-                                        onAction="#deleteWorkout"/>
-                            </HBox>
                         </VBox>
 
                         <VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
@@ -129,5 +123,4 @@
             </tabs>
         </TabPane>
     </center>
-
 </BorderPane>
