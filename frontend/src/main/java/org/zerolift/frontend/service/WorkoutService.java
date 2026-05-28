@@ -27,7 +27,7 @@ public class WorkoutService {
     public CompletableFuture<Integer> saveWorkout(String name, String description, List<String> exerciseIds) {
         try {
             String json = objectMapper.writeValueAsString(
-                    Map.of("title", name, "exerciseIds", exerciseIds)
+                    Map.of("title", name, "description", description, "exerciseIds", exerciseIds)
             );
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(BASE_URL))
