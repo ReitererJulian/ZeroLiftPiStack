@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 public class ExerciseService {
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final String URL = "https://api.zerolift.at/api/exercises";
+    private final String URL = "http://localhost:8080/api/exercises";
 
     // Holt alle Übungen vom Server
     public CompletableFuture<List<Map<String, Object>>> getAllExercises() {
@@ -27,9 +27,11 @@ public class ExerciseService {
     }
 
     // Sendet eine neue Übung ans Backend
-    public CompletableFuture<Integer> saveExercise(String name, String description) {
+    public CompletableFuture<Integer> saveExercise(String name, String description, List<String> equipmentIds) {
         try {
-            String json = objectMapper.writeValueAsString(Map.of("name", name, "description", description));
+            String json = objectMapper.writeValueAsString(
+                    Map.of("title", name, "description", description, "equipmentIds", equipmentIds)
+            );
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(URL))
                     .header("Content-Type", "application/json")

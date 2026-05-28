@@ -23,8 +23,4 @@ public class Equipment {
     @JsonProperty("description")
     @Column(columnDefinition = "TEXT")
     private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "created_by")
-    private User createdBy;
 }

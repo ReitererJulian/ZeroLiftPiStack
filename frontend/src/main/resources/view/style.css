@@ -292,3 +292,33 @@
     -fx-border-style: solid;
     -fx-border-width: 1px 0 0 0;
 }
+
+#workoutDescriptionArea {
+    -fx-pref-height: 60px;
+    -fx-max-height: 60px;
+}
+
+#workoutDescriptionArea {
+    -fx-pref-height: 60px;
+    -fx-max-height: 60px;
+    -fx-control-inner-background: #1E1E1E;
+}
+
+#workoutDescriptionArea .content {
+    -fx-background-color: #1E1E1E;
+}
+
+
+#exerciseDescriptionArea {
+    -fx-pref-height: 60px;
+    -fx-max-height: 60px;
+    -fx-control-inner-background: #1E1E1E;
+}
+
+#exerciseDescriptionArea .content {
+    -fx-background-color: #1E1E1E;
+}
+
+.text-area .content {
+    -fx-background-color: #1E1E1E;
+}
