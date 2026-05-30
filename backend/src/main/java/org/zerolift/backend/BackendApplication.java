@@ -1,7 +1,10 @@
 package org.zerolift.backend;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class BackendApplication {
@@ -9,4 +12,11 @@ public class BackendApplication {
         SpringApplication.run(BackendApplication.class, args);
     }
 
+    @Bean
+    CommandLineRunner test(ApplicationContext ctx) {
+        return args -> {
+            System.out.println("WorkoutController exists: " +
+                    ctx.containsBean("workoutController"));
+        };
+    }
 }

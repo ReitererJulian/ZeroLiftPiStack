@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 public class WorkoutService {
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private static final String BASE_URL = "http://localhost:8080/api/workouts";
+    private static final String BASE_URL = "https://api.zerolift.at/api/workouts";
 
     public CompletableFuture<List<Map<String, Object>>> getAllWorkouts() {
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(BASE_URL)).GET().build();

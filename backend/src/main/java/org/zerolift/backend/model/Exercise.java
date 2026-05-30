@@ -25,7 +25,7 @@ public class Exercise {
 
     @ManyToMany
     @JoinTable(
-            name = "exercise_equipment", // Name der Zwischentabelle aus deinem Diagramm
+            name = "exercise_equipment",
             joinColumns = @JoinColumn(name = "exercise_id"),
             inverseJoinColumns = @JoinColumn(name = "equipment_id")
     )

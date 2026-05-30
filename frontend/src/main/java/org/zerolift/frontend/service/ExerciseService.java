@@ -13,9 +13,8 @@ import java.util.concurrent.CompletableFuture;
 public class ExerciseService {
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final String URL = "http://localhost:8080/api/exercises";
+    private final String URL = "https://api.zerolift.at/api/exercises";
 
-    // Holt alle Übungen vom Server
     public CompletableFuture<List<Map<String, Object>>> getAllExercises() {
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(URL)).GET().build();
         return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -26,7 +25,6 @@ public class ExerciseService {
                 });
     }
 
-    // Sendet eine neue Übung ans Backend
     public CompletableFuture<Integer> saveExercise(String name, String description, List<String> equipmentIds) {
         try {
             String json = objectMapper.writeValueAsString(

@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import org.springframework.stereotype.Component;
 import org.zerolift.frontend.service.EquipmentService;
 import org.zerolift.frontend.service.ExerciseService;
 import org.zerolift.frontend.service.WorkoutService;
@@ -14,7 +13,6 @@ import org.zerolift.frontend.service.WorkoutService;
 import java.util.List;
 import java.util.Map;
 
-@Component
 public class MainController {
 
     // ── Equipment ────────────────────────────────────────────────────
